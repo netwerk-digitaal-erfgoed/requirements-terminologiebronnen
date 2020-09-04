@@ -1,16 +1,572 @@
 <pre class='metadata'>
-Title: Your Spec Title
-Shortname: your-spec
-Level: 1
+Title: Requirements voor terminologiebronnen
+Shortname: nde-requirements-terminologiebronnen
 Status: LS
-URL: http://example.com/url-this-spec-will-live-at
-Editor: Your Name, Your Company http://example.com/your-company, your-email@example.com, http://example.com/your-personal-website
-Abstract: A short description of your spec, one or two sentences.
+Markup Shorthands: css yes, markdown yes
+URL: https://netwerk-digitaal-erfgoed.github.io/requirements-terminologiebronnen/
+Editor: Sjors de Valk, Netwerk Digitaal Erfgoed https://www.netwerkdigitaalerfgoed.nl, sjors@sjorsdevalk.nl
+Abstract: Dit document beschrijft de functionele en niet-functionele requirements waar terminologiebronnen aan moeten voldoen om gebruikt te kunnen worden in het Netwerk Digitaal Erfgoed (NDE).
 </pre>
 
-Introduction {#intro}
-=====================
+Inleiding {#inleiding}
+============
+Hoe kunnen gebruikers – zoals burgers, leerlingen of wetenschappers – informatie over schilderijen van Rembrandt vinden,
+ongeacht de instellingen die deze informatie beheren? Dat lukt alleen als collectiebeheerders van instellingen gebruikmaken van dezelfde termen
+voor het beschrijven van dezelfde informatie. Bijvoorbeeld: door de term "schilderij" te benutten in plaats van "painting"
+of "kunstwerk". Of de term "Rembrandt van Rijn" in plaats van "Rembrandt".
 
-Introduction here.
+Maar hoe weten collectiebeheerders welke termen er zijn? Door gebruik te maken van gemeenschappelijke terminologiebronnen, zoals thesauri of referentielijsten.
+Deze terminologiebronnen dienen dan wel aan bepaalde voorwaarden te voldoen zodat de termen in deze bronnen
+eenduidig gevonden en gebruikt kunnen worden.
 
-test
+Dit document beschrijft de voorwaarden in de vorm van functionele en niet-functionele requirements.
+De requirements hebben tot doel om de bronnen beter bruikbaar te maken voor collectiebeheerders en om de bronnen vindbaar te maken
+via het [Termennetwerk](https://www.netwerkdigitaalerfgoed.nl/kennis-en-voorzieningen/digitaal-erfgoed-bruikbaar/termennetwerk/) van NDE.
+
+De requirements zijn opgesteld door het project [Gestandaardiseerde termen in het netwerk](https://www.netwerkdigitaalerfgoed.nl/activiteiten/digitaal-erfgoed-bruikbaar/gestandaardiseerde-termen-in-het-netwerk/).
+Het project is onderdeel van het intensiveringsprogramma 2019-2020 van het Netwerk Digitaal Erfgoed.
+De requirements nemen de [Digitaal Erfgoed Referentiearchitectuur 3.0](https://dera.netwerkdigitaalerfgoed.nl/) (DERA) als uitgangspunt.
+De requirements zijn een verdieping van DERA en kunnen een aanvulling vormen van een toekomstige versie van DERA.
+
+Dit document beschrijft enkel de requirements die specifiek gelden voor bronhouders van terminologiebronnen.
+Daarnaast zijn er algemene requirements die gelden voor alle bronhouders, ongeacht het soort informatie dat zij aanbieden.
+Deze requirements worden uitgewerkt in een opzichzelfstaand [document voor datasets](https://netwerk-digitaal-erfgoed.github.io/requirements-datasets/).
+De requirements voor terminologiebronnen zijn dus een aanvulling op de requirements voor datasets.
+
+<div class="issue">
+    Een begrippenkader opnemen, met begrippen en hun definities. Dit is bij voorkeur een separaat document dat ook gebruikt kan worden
+    door andere documenten, zoals de "Requirements voor datasets".
+</div>
+
+Doelgroep {#doelgroep}
+--------------------
+
+Dit document is bestemd voor bronhouders van terminologiebronnen, waaronder hun informatiespecialisten, applicatiebeheerders en ontwikkelaars.
+
+Status {#status}
+--------------------
+
+Dit document is een concept en nog geen officiële publicatie.
+
+Prioriteitstelling van requirements {#prioriteitstelling#}
+============
+
+Elke requirement is voorzien van een prioriteit. De prioriteit volgt de [MoSCoW-methode](https://nl.wikipedia.org/wiki/MoSCoW-methode):
+
+<table>
+    <thead>
+        <tr>
+            <th>Prioriteit</th>
+            <th>Toelichting</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Must have</td>
+            <td>De requirement is noodzakelijk</td>
+        </tr>
+        <tr>
+            <td>Should have</td>
+            <td>De requirement is belangrijk, maar niet noodzakelijk<td>
+        </tr>
+        <tr>
+            <td>Could have</td>
+            <td>De requirement is gewenst, maar niet belangrijk<td>
+        </tr>
+        <tr>
+            <td>Would have</td>
+            <td>De requirement is interessant, maar nu niet gewenst<td>
+        </tr>
+    </tbody>
+</table>
+
+Requirements {#requirements}
+============
+
+De requirements zijn zowel functioneel als niet-functioneel.
+Functionele requirements beschrijven de vereiste werking van een terminologiebron.
+Ze maken duidelijk welke functionaliteit een bron moeten bieden om gebruikt te kunnen worden in het Netwerk Digitaal Erfgoed.
+Niet-functionele requirements beschrijven hoe een terminologiebron de functionele requirements moet waarmaken,
+bijvoorbeeld met welke standaarden of technologieën.
+Deze requirements zijn vooral bedoeld voor de ontwikkelaars die het systeem voor de terminologiebron maken.
+
+De terminologiebron maakt termen vindbaar via een koppelvlak {#1}
+--------------------
+**Prioriteit**: Must have
+
+Termen in een terminologiebron zijn alleen bruikbaar als ze gevonden kunnen worden door een collectiebeheerder.
+Voor optimale bruikbaarheid moet een collectiebeheerder vanuit haar eigen systeem kunnen zoeken naar termen,
+zonder daarvoor steeds naar het systeem van de terminologiebron te moeten gaan.
+Om dit mogelijk te maken dient een terminologiebron een koppelvlak – een *endpoint* – te bieden.
+Dit koppelvlak kan geautomatiseerd aangesproken worden door het systeem van de collectiebeheerder.
+
+Het koppelvlak moet van een bepaald type zijn: een SPARQL-endpoint.
+Zo'n endpoint heeft zowel een krachtige zoektaal – \[SPARQL](https://www.w3.org/TR/sparql11-overview/) – als de snelheid die nodig
+is om zoekvragen van een collectiebeheerder tijdig te kunnen beantwoorden.
+
+<div class="note">
+    **Discussie**: Is het zinnig om SPARQL zo nadrukkelijk te eisen? Of zouden we dit moeten openlaten?
+</div>
+
+Deze requirement vereist niet dat een terminologiebron *zelf* een koppelvlak moet bieden.
+Een bronhouder kan ervoor kiezen om het koppelvlak van een ander platform te benutten, bijvoorbeeld van een organisatie met wie
+de bronhouder samenwerkt.
+Verder staat het een bronhouder vrij om, naast een SPARQL-endpoint, ook andere soorten endpoints te bieden om termen te vinden.
+Zoals een endpoint dat gebruikmaakt van [Triple Pattern Fragments](https://linkeddatafragments.org/in-depth/#tpf).
+
+De terminologiebron maakt termen vindbaar via een voor mensen toegankelijke online zoekomgeving {#2}
+--------------------
+**Prioriteit**: Could have
+
+Een collectiebeheerder wil de mogelijkheid hebben om termen in een terminologiebron op te zoeken.
+Dit stelt haar in staat om een beeld te krijgen van de structuur en samenhang van de bron.
+Daarom dient de terminologiebron een online zoekomgeving te bieden die door de collectiebeheerder geraadpleegd kan worden.
+Voorbeelden van zoekomgevingen zijn die van de [Cultuurhistorische Thesaurus](https://thesaurus.cultureelerfgoed.nl/search;conceptschemes=cht:b532325c-dc08-49db-b4f1-15e53b037ec3),
+[ErfGeo](https://erfgeo.nl/thesaurus/) en \[ULAN](http://www.getty.edu/research/tools/vocabularies/ulan/).
+
+Deze requirement is geen verplichting: niet elke bron heeft de mogelijkheid om een online zoekomgeving aan te bieden.
+Een bronhouder kan ervoor kiezen om de zoekomgeving van een ander platform te benutten, bijvoorbeeld van een organisatie met wie de bronhouder samenwerkt.
+
+De terminologiebron publiceert termen met bepaalde metadatastandaarden {#3}
+--------------------
+**Prioriteit**: Must have
+
+Het systeem van een collectiebeheerder moet termen in een terminologiebron eenduidig kunnen verwerken.
+Dit wordt vergemakkelijkt als bronnen dezelfde metadatastandaarden gebruiken voor het publiceren van informatie over dezelfde soort termen,
+zoals personen, onderwerpen, plaatsen of gebeurtenissen.
+
+Er bestaan verschillende metadatastandaarden die gebruikt kunnen worden, afhankelijk van het doel.
+Bijvoorbeeld: een standaard als \[SKOS](https://www.w3.org/TR/2009/NOTE-skos-primer-20090818/) is geschikt om thesaurustermen te beschrijven.
+Een standaard als [Schema.org](https://schema.org/) is generiek en geschikt om termen globaal te beschrijven.
+En een standaard als [Person Name Vocabulary](https://w3id.org/pnv#) (PNV) is specifiek en geschikt om persoonsnamen fijnzinnig te beschrijven.
+
+Door de verscheidenheid aan standaarden, soorten termen en toepassingsmogelijkheden is het mogelijk noch wenselijk om bepaalde standaarden voor te schrijven.
+Wel kunnen bronhouders en collectiebeheerders aangeven welke standaarden voor welke doelen gebruikt kunnen worden.
+Deze standaarden kunnen dan als aanbevelingen ('best practices') bij deze requirement gevoegd worden.
+
+<div class="note">
+    **Discussie**: Tabel opnemen met aanbevolen metadatastandaarden?
+</div>
+
+De terminologiebron publiceert bepaalde informatie over haar termen {#4}
+--------------------
+**Prioriteit**: Must have
+
+Een term in een terminologiebron kan alleen gevonden en begrepen worden door een collectiebeheerder als er ten minste bepaalde informatie
+over de term gepubliceerd wordt. Welke informatie dat is, is afhankelijk van het type term.
+
+Bijvoorbeeld: bij de informatie over een persoon dient niet alleen diens naam gepubliceerd te worden ("Jan de Vries"),
+maar ook diens geboortedatum ("12 oktober 1816"). Zonder de geboortedatum is onduidelijk welke Jan de Vries bedoeld wordt.
+Een ander voorbeeld: bij de informatie over een geografische entiteit dient niet alleen de naam gepubliceerd te worden ("Utrecht"),
+maar ook de soort ("Gemeente"). Zonder de soort is onduidelijk of de provincie, gemeente of stad bedoeld wordt.
+
+Onderstaande tabel bevat de informatie die idealiter voor elke term gepubliceerd wordt, ongeacht het type van de term:
+
+<table>
+    <thead>
+        <tr>
+            <th>Soort informatie</th>
+            <th>Betekenis</th>
+            <th>Toelichting</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Identifier</td>
+            <td>Een unieke identifier van de term</td>
+            <td>De identifier dient een URI te zijn</td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td>Het type van de term, zoals een "Persoon", "Onderwerp" of "Plaats"</td>
+            <td>Het type dient afkomstig te zijn uit een metadatastandaard, zoals `schema:Person` of `skos:Concept`</td>
+        </tr>
+        <tr>
+            <td>Naam</td>
+            <td>De naam van de term</td>
+            <td>Staat ook bekend als "label" of "voorkeurslabel"</td>
+        </tr>
+        <tr>
+            <td>Alternatieve naam</td>
+            <td>Een alternatieve benaming van de term, zoals een synoniem</td>
+            <td>Bijvoorbeeld: `Rembrandt van Rijn` is een alternatieve naam van `Rembrandt`</td>
+        </tr>
+        <tr>
+            <td>Definitie</td>
+            <td>Een definitie of omschrijving van de term</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Notitie</td>
+            <td>Aanvullende informatie over de reikwijdte of het gebruik van de term</td>
+            <td>Staat ook bekend als "scope note"</td>
+        </tr>
+        <tr>
+            <td>Gerelateerde term</td>
+            <td>Een term die een (niet-hiërarchische) relatie met de term heeft</td>
+            <td>Bijvoorbeeld: de term `Theo van Gogh` is gerelateerd aan `Vincent van Gogh`</td>
+        </tr>
+        <tr>
+            <td>Bovenliggende term</td>
+            <td>Een term die hiërarchisch direct boven de term ligt</td>
+            <td>Bijvoorbeeld: de term `Noord-Brabant` is de bovenliggende term van `Nuenen`</td>
+        </tr>
+        <tr>
+            <td>Onderliggende term</td>
+            <td>Een term die hiërarchisch direct onder de term ligt</td>
+            <td>Bijvoorbeeld: de term `slagzwaard` is een onderliggende term van `zwaard`</td>
+        </tr>
+    </tbody>
+</table>
+
+De terminologiebron publiceert relaties tussen haar termen als er relaties zijn {#5}
+--------------------
+**Prioriteit**: Should have
+
+Een terminologiebron kan relaties tussen termen bevatten.
+Bijvoorbeeld: een terminologiebron over personen kan een relatie hebben tussen `Vincent van Gogh` en `Theo van Gogh`.
+En een terminologiebron over geografische entiteiten kan een relatie hebben tussen `Nuenen` en `Noord-Brabant`.
+Als een terminologiebron relaties heeft, dient de bron deze toegankelijk te maken:
+de relaties geven context aan termen en helpen een collectiebeheerder om een besluit te nemen over de toepasbaarheid ervan bij het beschrijven van haar informatie.
+
+Het systeem van de collectiebeheerder moet de relaties tussen termen geautomatiseerd kunnen verwerken.
+Daarom dient een bron de relaties op een machineleesbare manier te publiceren.
+De wijze waarop een bron dit dient te doen is afhankelijk van de aard van de relaties en van de [metadatastandaarden van de bron](#3).
+Bijvoorbeeld: als een bron SKOS gebruikt, kunnen relaties met eigenschappen als `skos:broader`, `skos:narrower` of `skos:related` gepubliceerd worden.
+Als een bron Schema.org gebruikt, kunnen relaties met eigenschappen als `schema:isPartOf`, `schema:hasPart` of `schema:isBasedOn` gepubliceerd worden.
+
+<div class="note">
+    **Discussie**: Een RDF-voorbeeld opnemen om de modellering van de relaties te laten zien?
+</div>
+
+De terminologiebron publiceert relaties met termen in andere terminologiebronnen {#6}
+--------------------
+**Prioriteit**: Should have
+
+Een term in een terminologiebron kan voorkomen in een andere terminologiebron.
+Bijvoorbeeld: de term `Vincent van Gogh` wordt beschreven in zowel RKDartists als Wikidata en de
+term `fiets` wordt beschreven in zowel de Cultuurhistorische Thesaurus als DBpedia.
+Maar hoe kan een collectiebeheerder te weten komen dat de termen over hetzelfde gaan?
+Dat lukt alleen als een terminologiebron dit aangeeft.
+Een terminologiebron dient deze relaties dan ook toegankelijk te maken: ze maken duidelijk hoe termen zich tot elkaar verhouden.
+
+Er bestaan verschillende mogelijkheden voor een terminologiebron om naar termen in andere bronnen te verwijzen:
+
+1. Een terminologiebron verwijst naar zoveel mogelijk andere bronnen.
+    Bijvoorbeeld: een bron verwijst naar zowel de AAT, DBpedia als de Cultuurhistorische Thesaurus.
+    Collectiebeheerders kunnen hierdoor meteen zien hoe termen in de bron zich verhouden tot termen in andere bronnen.
+    Het beheren van relaties met meerdere bronnen vergt evenwel een tijdsinvestering.
+1. Een terminologiebron verwijst alleen naar de bron die meer autoriteit heeft dan de eigen bron.
+    Bijvoorbeeld: een bron verwijst enkel naar de AAT.
+    Dit vergemakkelijkt het beheer voor een bronhouder: zij hoeft alleen de relaties met één andere bron te onderhouden.
+    Maar het betekent ook dat er geen directe relaties tussen bronnen bestaan, enkel indirect via de autoritatieve bron.
+1. Een terminologiebron verwijst alleen naar de bron die de meeste verwijzingen naar termen in andere terminologiebronnen heeft.
+    Bijvoorbeeld: een bron verwijst enkel naar Wikidata.
+    Dit vergemakkelijkt het beheer voor een bronhouder: zij hoeft alleen de relaties met één andere bron te onderhouden.
+    Daarentegen zorgt dit voor een afhankelijkheid van deze bron.
+
+<div class="note">
+    **Discussie**: Moet deze requirement een voorkeur uitspreken voor een van bovenstaande mogelijkheden?
+</div>
+
+Het systeem van een collectiebeheerder moet de relaties van termen geautomatiseerd kunnen verwerken.
+Daarom dient een bron de relaties op een machineleesbare manier te publiceren.
+
+De wijze waarop een bron dit dient te doen is afhankelijk van de aard van de relaties en van de [metadatastandaarden van de bron](#3).
+Bijvoorbeeld: als een bron SKOS gebruikt, kunnen relaties gepubliceerd worden met eigenschappen als `skos:exactMatch`, `skos:closeMatch` of `skos:broadMatch`.
+Als een bron \[OWL](https://www.w3.org/TR/owl2-overview/) of [RDF Schema](https://www.w3.org/TR/rdf-schema/) gebruikt,
+kunnen relaties gepubliceerd worden met eigenschappen als `owl:sameAs` of `rdfs:seeAlso`.
+
+<div class="note">
+    **Discussie**: Een RDF-voorbeeld opnemen om de modellering van de relaties te laten zien?
+</div>
+
+Een bron kan de relaties met termen in andere terminologiebronnen op twee manieren publiceren:
+
+1. Een terminologiebron publiceert de relaties als onderdeel van de reguliere informatie die de bron aanbiedt bij elke term.
+1. Een terminologiebron publiceert de relaties in een aparte dataset, een *linkset*.
+    Deze aanpak is waardevol voor bronnen die de relaties met andere bronnen niet kunnen beheren of publiceren als onderdeel van de reguliere informatie van hun termen.
+
+De terminologiebron publiceert de status van haar termen {#7}
+--------------------
+**Prioriteit**: Should have
+
+Een term in een terminologiebron heeft een levenscyclus. Een term wordt bijvoorbeeld eerst voorgesteld,
+dan goedgekeurd en daarna in gebruik genomen, om na verloop van tijd te komen te vervallen.
+Een terminologiebron dient door middel van een status duidelijk te maken in welke fase van de levenscyclus een term zich bevindt.
+Hierdoor kan een collectiebeheerder bepalen of zij de term wel of niet wil gebruiken.
+De ene collectiebeheerder wil bijvoorbeeld wel een kandidaatterm benutten, de andere collectiebeheerder niet.
+
+Deze requirement doet geen uitspraak over de statussen die een terminologiebron moet ondersteunen:
+een bron bepaalt zelf hoe de levenscyclus van haar termen eruit ziet en welke statussen daarbij horen.
+Een bron kan ook besluiten om *niet* met statussen te werken.
+In dat geval mag een collectiebeheerder aannemen dat de termen goedgekeurd zijn en zonder voorbehoud gebruikt mogen worden.
+
+<div class="note">
+    **Discussie**: Is bovenstaande invulling van de requirement correct?
+    Of is het juist wenselijk of nodig dat terminologiebronnen wel statussen gaan gebruiken – misschien zelfs dezelfde statussen?
+    Ter illustratie: het [Linked Data Registry](https://github.com/UKGovLD/registry-core/wiki/Principles-and-concepts#status-and-life-cycle)
+    van UKGov onderkent 11 statussen.
+</div>
+
+Het systeem van een collectiebeheerder moet de statussen van termen geautomatiseerd kunnen verwerken,
+bijvoorbeeld om een kandidaatterm van een goedgekeurde term te kunnen onderscheiden.
+Daarom dient een bron de statussen op een machineleesbare manier te publiceren.
+
+De metadatastandaard die hiervoor gebruikt moet worden is afhankelijk van de levenscyclus die de bron hanteert voor haar termen.
+Bijvoorbeeld: een bron met een beperkte levenscyclus heeft behoefte aan een andere standaard om statussen uit te drukken
+dan een bron met een uitgebreide levenscyclus. Deze requirement schrijft daarom geen standaard voor.
+
+<div class="note">
+    **Discussie**: Zijn er metadatastandaarden die aanbevolen kunnen worden voor het publiceren van statussen?
+    Bijvoorbeeld: [The Publishing Status Ontology](https://sparontologies.github.io/pso/current/pso.html) (PSO)?
+</div>
+
+De terminologiebron blijft verouderde termen publiceren in plaats van ze te verwijderen {#8}
+--------------------
+**Prioriteit**: Must have
+
+Een term kan na verloop van tijd wijzigen, zowel syntactisch als semantisch.
+Maar een term kan op een gegeven moment ook verouderen.
+Bijvoorbeeld: een term is niet meer accuraat of een term blijkt een doublure te zijn van een term die al in de bron voorkomt.
+
+De verouderde term mag in dat geval echter niet verwijderd worden: een collectiebeheerder kan de term nog in gebruik hebben.
+In plaats daarvan moet de terminologiebron kenbaar maken dat de term niet meer gebruikt mag worden.
+Als een term niet meer accuraat is, kan de terminologiebron dit doen door er een [specifieke status aan toe te kennen](#7).
+Als een term een doublure is, kan de terminologiebron dit doen met de HTTP-statuscode [301 Moved Permanently](https://en.wikipedia.org/wiki/HTTP_301) en de locatie waar de gewenste term te vinden is.
+
+De terminologiebron biedt een manier om nieuwe termen of wijzigingen aan termen voor te stellen {#9}
+--------------------
+**Prioriteit**: Should have
+
+Een collectiebeheerder kan ontdekken dat een bepaalde term in een terminologiebron ontbreekt of dat een bestaande term gewijzigd moet worden.
+Bijvoorbeeld: een bron kan de algemene term `zwaard` bevatten maar niet de specifiekere term `slagzwaard`.
+Of een bron kan de term `Maximilliaan van Egmont` (met twee "l"-en) bevatten terwijl `Maximiliaan van Egmont` (met één "l") bedoeld wordt.
+Daarom dient een terminologiebron een manier te hebben waarmee een collectiebeheerder wijzigingsvoorstellen kan indienen.
+Deze terugkoppeling verbetert de kwaliteit van de bron.
+
+Deze requirement is geen verplichting: niet elke terminologiebron kan wijzigingsvoorstellen verwerken.
+Daarnaast geeft deze requirement niet aan hoe een collectiebeheerder wijzigingsvoorstellen moeten kunnen aandragen,
+bijvoorbeeld via e-mail, een online formulier of een API. Evenmin geeft deze requirement aan hoe het proces van verwerking eruit ziet,
+bijvoorbeeld het moment of de snelheid van verwerken of de wijze waarop een collectiebeheerder geïnformeerd wordt. Een terminologiebron bepaalt dit zelf.
+
+<div class="note">
+    **Discussie:** Is bovenstaande invulling van de requirement correct?
+    Of is het juist wenselijk of nodig om tot een gestandaardiseerd proces te komen voor de verwerking van voorstellen van een collectiebeheerder?
+</div>
+
+Het systeem van een collectiebeheerder moet geautomatiseerd kunnen achterhalen of, en zo ja, hoe een terminologiebron voorstellen
+voor nieuwe termen of wijzigingen aan termen accepteert. Daarom dient een bron informatie hierover op een machineleesbare manier te publiceren.
+
+Dit stelt het systeem in staat om bij een collectiebeheerder duidelijk te maken welke mogelijkheden een bron biedt en haar, indien gewenst,
+te begeleiden bij het indienen van voorstellen. Bijvoorbeeld: als een bron wijzigingen aan termen accepteert als die via een bepaald e-mailadres
+worden aangemeld, dan dient het systeem andere handelingen te verrichten dan als een bron wijzigingen via een API accepteert.
+In het ene geval moet een collectiebeheerder bijvoorbeeld zelf, handmatig, actie ondernemen,
+in het andere geval kan het systeem dit geautomatiseerd voor haar doen.
+
+De informatie die een bron moet publiceren is afhankelijk van de mogelijkheden die een bron biedt voor het indienen van voorstellen.
+Bijvoorbeeld: voor het indienen per e-mail is andere informatie nodig dan voor het indienen via een API. Deze requirement schrijft daarom geen standaard voor.
+
+<div class="note">
+    **Discussie** Zijn er metadatastandaarden die aanbevolen kunnen worden voor het publiceren van dit soort informatie?
+</div>
+
+De terminologiebron publiceert informatie over veranderingen aan termen {#10}
+--------------------
+**Prioriteit**: Could have
+
+Termen in een terminologiebron veranderen. Nieuwe termen worden toegevoegd, bestaande termen gewijzigd.
+Voor collectiebeheerders is het van belang om te weten welke veranderingen zich voordoen.
+Zo kunnen zij achterhalen of zij aanpassingen moeten doorvoeren in de termen die zij gebruiken.
+
+Bijvoorbeeld: als een collectiebeheerder een term gebruikt die komt te vervallen, dan wil zij dat te weten komen.
+Of als een collectiebeheerder op dit moment een bepaalde generieke term gebruikt en de terminologiebron voegt
+een nieuwe, specifiekere term toe die beter past dan de generieke term, dan wil zij daarover geïnformeerd worden.
+Daarom dient een terminologiebron kenbaar te maken welke veranderingen aan welke termen zich voordoen.
+
+Deze requirement is geen verplichting: niet elke terminologiebron kan veranderingen bijhouden en publiceren.
+Bovendien geeft deze requirement niet aan hoe een terminologiebron veranderingen moet publiceren, bijvoorbeeld via een
+nieuwsbrief, mailinglijst, website of API. Evenmin geeft deze requirement aan wanneer een terminologiebron veranderingen moet publiceren,
+bijvoorbeeld eens per dag, week of maand, of proactief (voordat de veranderingen van toepassing zijn) of
+reactief (nadat de veranderingen van toepassing zijn). Een terminologiebron bepaalt dit zelf.
+
+<div class="note">
+    **Discussie:** Is bovenstaande invulling van de requirement correct?
+    Of is het juist wenselijk of nodig om tot een gestandaardiseerde aanpak te komen bij het publiceren van veranderingen?
+</div>
+
+Het systeem van een collectiebeheerder moet geautomatiseerd kunnen achterhalen of, en zo ja, hoe een terminologiebron veranderingen aan termen publiceert.
+Daarom dient een bron informatie hierover op een machineleesbare manier te publiceren.
+
+Dit stelt het systeem in staat om bij een collectiebeheerder duidelijk te maken welke mogelijkheden een bron biedt en haar, indien gewenst,
+te begeleiden om inzage te krijgen in de veranderingen. Bijvoorbeeld: als een bron veranderingen publiceert op een bepaalde webpagina,
+dient het systeem andere handelingen te verrichten dan als een bron veranderingen publiceert via een API.
+In het ene geval moet een collectiebeheerder bijvoorbeeld zelf, handmatig, actie ondernemen, in het andere geval kan het systeem dit geautomatiseerd voor haar doen.
+
+De informatie die een bron moet publiceren is afhankelijk van de mogelijkheden die een bron biedt bij het publiceren van veranderingen.
+Deze requirement schrijft daarom geen standaard voor.
+
+<div class="note">
+    **Discussie:** Zijn er metadatastandaarden die aanbevolen kunnen worden voor het publiceren van dit soort informatie?
+</div>
+
+De terminologiebron publiceert informatie over de assen en onderwerpen van de termen {#11}
+--------------------
+**Prioriteit**: Should have
+
+Een collectiebeheerder wil informatie over de assen en onderwerpen van de terminologiebron kunnen opvragen.
+Informatie over de assen maakt duidelijk of een bron termen bevat die gaan over "wie", "wat", "waar" en/of "wanneer".
+Informatie over de onderwerpen maakt duidelijk wat de inhoud van een bron is.
+Op basis hiervan kan een collectiebeheerder een besluit nemen over het al dan niet gebruiken van de bron.
+
+Bijvoorbeeld: de ene collectiebeheerder willen alleen gebruikmaken van een terminologiebron als deze personen ("wie"-as) beschrijft.
+En een andere collectiebeheerder wil alleen gebruikmaken van een bron als deze termen over het onderwerp "architectuur" of "Tweede Wereldoorlog" bevat.
+
+De onderwerpen per terminologiebron lopen sterk uiteen. Deze requirement kan daarom geen onderwerpen voorschrijven die gebruikt moeten worden: een bron bepaalt dit zelf.
+Wel dienen de onderwerpen termen uit terminologiebronnen te zijn die voldoen aan de requirements van dit document.
+
+Het systeem van een collectiebeheerder moet geautomatiseerd kunnen achterhalen welke assen een terminologiebron bestrijkt en over welke onderwerpen de bron gaat.
+Daarom dient een bron informatie hierover op een machineleesbare manier te publiceren.
+Bijvoorbeeld: als een collectiebeheerder alleen geïnteresseerd is in bronnen die over personen gaan, moet haar systeem dit kunnen herkennen.
+
+Deze requirement is geen verplichting: niet elke terminologiebron is zo opgezet dat eenduidig gedefinieerd kan worden wat de assen en onderwerpen zijn.
+
+<div class="note">
+    **Discussie:**
+    1. Zijn er metadatastandaarden die aanbevolen kunnen worden voor het publiceren van informatie over assen ("wie", "wat", "waar", "wanneer"), inclusief onderverdelingen (bijvoorbeeld voor "wie": deze as omvat "personen" en "corporaties")? Zou DCAT hiervoor gebruikt kunnen worden, met eigenschappen als `dct:temporal` of `dcat:theme`?
+    1. Kan er een aanbeveling gedaan worden over de wijze waarop een bron haar onderwerpen kan publiceren? Bijvoorbeeld: door SKOS te gebruiken?
+    1. Zou het voldoende zijn als een bron via `rdfs:Class` aangeeft welke typeringen zij hanteert? Dan kan het systeem van een collectiebeheerder daarnaar zoeken via SPARQL.
+</div>
+
+De terminologiebron publiceert informatie over de soort bron {#12}
+--------------------
+**Prioriteit**: Could have
+
+Een collectiebeheerder moet kunnen achterhalen wat de soort van de terminologiebron is, bijvoorbeeld een thesaurus, classificatiesysteem of trefwoordenlijst.
+
+Het systeem van een collectiebeheerder moet de soort van een terminologiebron geautomatiseerd kunnen verwerken. Daarom dient een bron informatie hierover op een machineleesbare manier te publiceren.
+
+<div class="note">
+    **Discussie:**
+    1. Is deze requirement nog van toepassing? Welk doel c.q. welke use case dient het? In hoeverre wordt deze requirement al gedekt door [requirement 3.11](#11)?
+    1. In hoeverre kan een terminologiebron eenduidig getypeerd worden, bijvoorbeeld als ‘thesaurus’ of ‘trefwoordenlijst’? Of zijn er ook hybride bronnen?
+    1. Welke metadatastandaard kan gebruikt worden voor het publiceren van dit soort informatie? Ter illustratie: [Asset Description Metadata Schema](https://joinup.ec.europa.eu/svn/adms/ADMS_v1.00/ADMS_SKOS_v1.00.rdf) (ADMS) bevat een eigenschap "asset type" met waarden als "CodeList", "NameAuthorityList" en "Thesaurus".
+    1. Deze requirement kan van belang zijn voor het Register en Termennetwerk. Bijvoorbeeld: het Termennetwerk wil alleen bronnen opvragen die van een bepaald type zijn, zoals een thesaurus, maar geen bronnen met "reguliere" informatie over erfgoedobjecten. Is deze requirement daarvoor nuttig? Of zou het Termennetwerk zelf moeten ‘ontdekken’ of bronnen ‘termen’ bevatten?
+</div>
+
+De terminologiebron publiceert haar termen volgens ISO-standaard 25964 als de bron een thesaurus is {#13}
+--------------------
+**Prioriteit**: Should have
+
+[ISO-standaard 25964](https://en.wikipedia.org/wiki/ISO_25964) beschrijft hoe thesauri gestructureerd moeten worden om termen beter vindbaar te maken. Hoe meer een terminologiebron hieraan voldoet, hoe bruikbaarder de bron is voor collectiebeheerders.
+
+<div class="note">
+    **Discussie:** In hoeverre is deze requirement een verplichting ("Must have")? Moeten of mogen thesauri zich aan de ISO-standaard conformeren?
+</div>
+
+De terminologiebron maakt termen vindbaar door te zoeken met operatoren {#14}
+--------------------
+**Prioriteit**: Must have
+
+Een collectiebeheerder weet soms niet welke term ze zoekt.
+In dat geval wil ze aan een terminologiebron geen precieze zoekvraag stellen (`Maximiliaan van Egmont`, `slagzwaard`) maar een ruime zoekvraag.
+Dit kan met *wildcards* of jokertekens. Bijvoorbeeld:
+
+1. De vraag `*zwaard` zoekt naar alle termen die eindigen op "zwaard" en vindt onder meer "slagzwaard" en "langzwaard".
+1. De vraag `slag*` zoekt naar alle termen die beginnen met "slag" en vindt onder meer "slagroom" en "slagmetaal".
+1. De vraag `*zee*` zoekt naar alle termen waarin "zee" voorkomt en vindt onder meer "zuiderzee", "zeeboeken" en "onderzeeboten".
+
+Daarnaast weet een collectiebeheerder soms vrij nauwkeurig welke term ze zoekt.
+In dat geval will ze aan een terminologiebron een vrij nauwkeurige zoekvraag stellen. Dit kan met Booleaanse operatoren. Bijvoorbeeld:
+1. De vraag `kuitbroek OR kniebroek` zoekt naar termen die "kuitbroek" of "kniebroek" zijn, maar niet bijvoorbeeld "klepbroek" of "heupbroek".
+1. De vraag `sportbroek AND zwembroek` zoekt naar termen die zowel sport- als zwembroek zijn, maar niet een van beide.
+1. De vraag `broek NOT pofbroek` zoekt naar alle termen die "broek" zijn maar niet "pofbroek".
+
+Het systeem van een collectiebeheerder moet de ondersteunde operatoren geautomatiseerd kunnen verwerken. Op deze manier kan het systeem de beheerder ondersteunen
+bij het formuleren van zoekvragen. Daarom dient een bron haar zogeheten *search capabilities* op een machineleesbare manier te publiceren.
+
+<div class="note">
+    **Discussie:** Zijn er metadatastandaarden die gebruikt kunnen worden voor het publiceren van *search capabilities*?
+</div>
+
+<div class="note">
+    **Discussie:**
+    Deze requirement is nog te grof en moet gedetailleerd of opgesplitst worden. Welke zoekoperatoren moet een terminologiebron ten minste ondersteunen?
+    Bijvoorbeeld: naast wildcards en Booleaanse operatoren zou er ook gezocht kunnen worden op basis van
+    [proximity](https://lucene.apache.org/solr/guide/7_5/the-standard-query-parser.html#proximity-searches) of
+    [ranges](https://lucene.apache.org/solr/guide/7_5/the-standard-query-parser.html#range-searches).
+    Of moet er ondersteuning zijn voor aanhalingstekens ("), om duidelijk te maken dat er naar een precieze reeks woorden
+    gezocht moet worden in plaats van naar afzonderlijke woorden?
+</div>
+
+De terminologiebron vult zoekvragen automatisch aan ("auto-completion") {#15}
+--------------------
+**Prioriteit**: Should have
+
+Een collectiebeheerder wil zo efficiënt mogelijk zoeken. Daarom wil ze niet eerst een gehele zoekvraag invoeren alvorens te kunnen zoeken.
+In plaats daarvan wil ze een deel van een zoekvraag opgeven die vervolgens automatisch aangevuld wordt door de terminologiebron.
+Bijvoorbeeld: de zoekvraag `Max` wordt aangevuld tot `Maximiliaan van Egmont`. Vervolgens kan de collectiebeheerder een zoekactie naar de aangevulde zoekvraag starten.
+
+Het kan gebeuren dat een gedeeltelijke zoekvraag van een collectiebeheerder aangevuld kan worden tot meerdere zoekvragen.
+Bijvoorbeeld: de zoekvraag `Max` wordt aangevuld tot `Maximiliaan van Egmont`, `Max Lewin` en `Maximiliaan II Emanuel van Beieren`.
+In dat geval dient de collectiebeheerder eerst de gewenste zoekvraag te selecteren en vervolgens een zoekactie te starten.
+
+<div class="note">
+    **Discussie:** Is deze requirement wenselijk of nodig? In hoeverre komt [requirement 3.14](#14) hieraan tegemoet door ondersteuning te bieden voor wildcards?
+</div>
+
+De terminologiebron zoekt termen met een bepaalde status of bovenliggende term {#16}
+--------------------
+**Prioriteit**: Should have
+
+Een collectiebeheerder wil termen vinden die zo goed mogelijk voldoen aan haar zoekvraag.
+Deze zoekvraag bevat een of meer woorden, zoals `zwaard` of `Haarlem`.
+Maar om te voorkomen dat een collectiebeheerder te veel resultaten terugkrijgt, wil zij haar zoekvraag voorzien van aanvullende criteria om de resultaten te beperken:
+
+1. Met criterium ‘status’ kan een collectiebeheerder aangeven dat zij alleen termen met deze status wil vinden (zie [requirement 3.7](#7)). Bijvoorbeeld alleen goedgekeurde termen (en geen kandidaattermen of verouderde termen).
+1. Met criterium ‘bovenliggende term’ kan een collectiebeheerder aangeven dat zij alleen termen met deze bovenliggende term wil vinden. Bijvoorbeeld alleen plaatsen die tot Nederland behoren (en niet tot Zuid-Afrika ("Haarlem") of de Verenigde Staten ("New Haarlem")).
+
+<div class="note">
+    **Discussie:**  Deze requirement is waarschijnlijk nog te grof en moet gedetailleerd of opgesplitst worden.
+    Bijvoorbeeld: moet een collectiebeheerder – naast status en bovenliggende term – ook andere criteria kunnen opgeven?
+    Of zou deze requirement opgesplitst moeten worden in twee requirements, een voor ‘status’ en een voor ‘bovenliggende term’?
+</div>
+
+De terminologiebron sorteert gevonden termen op relevantie {#17}
+--------------------
+**Prioriteit**: Must have
+
+Een collectiebeheerder wil termen vinden die zo goed mogelijk voldoen aan haar zoekvraag.
+Daarom sorteert de terminologiebron de gevonden termen op basis van relevantie:
+de termen die de zoekvraag waarschijnlijk het beste beantwoorden worden als eerste teruggegeven.
+
+Deze requirement bepaalt niet wat ‘relevantie’ precies is – dat is afhankelijk van de terminologiebron, de aard van haar termen en de zoekvragen van een collectiebeheerder.
+Evenmin schrijft deze requirement voor hoe een terminologiebron dient te zorgen voor de sortering. Een bron kan bijvoorbeeld termen standaard sorteren op relevantie,
+zonder dat het systeem van een collectiebeheerder hiervoor iets hoeft te doen, maar een bron kan er ook voor kiezen om het systeem van de collectiebeheerder expliciet te laten aangeven
+dat termen op relevantie gesorteerd moeten worden (zoals met een `ORDER BY`-statement in een SPARQL-query).
+
+Een terminologiebron mag naast relevantie ook andere mogelijkheden bieden voor het sorteren van termen, bijvoorbeeld alfabetisch op basis van hun naam.
+Dit is evenwel geen verplichting: het systeem van een collectiebeheerder kan deze sortering ook zelf verzorgen.
+
+De terminologiebron publiceert beeldmateriaal van haar termen {#18}
+--------------------
+**Prioriteit**: Could have
+
+Een collectiebeheerder wil zo snel mogelijk kunnen vaststellen of de door de terminologiebron gevonden termen voldoen aan haar zoekvraag.
+Het helpt een collectiebeheerder als een bron niet alleen tekstuele informatie per term teruggeeft, maar ook visuele informatie, zoals een afbeelding.
+Visuele informatie stelt een collectiebeheerder in staat om te kunnen zien of een term relevant is.
+Bijvoorbeeld: het onderscheid tussen een "wipmolen" en een "weidemolen" hoeft op basis van een beschrijving niet meteen helder te zijn, maar met foto’s van beide wel.
+
+Deze requirement is geen verplichting: niet elke terminologiebron kan beeldmateriaal van haar termen publiceren.
+Verder doet deze requirement geen uitspraak over de aard of kwaliteit van het beeldmateriaal, bijvoorbeeld het formaat (zoals JPG of Ogg) of de grootte.
+Evenmin geeft deze requirement aan of een terminologiebron het beeldmateriaal zelf moet aanbieden of kan verwijzen naar materiaal van anderen.
+Een terminologiebron bepaalt dit zelf.
+
+<div class="note">
+    **Discussie:** Moet deze requirement een advies geven of uitspraak doen over de metadatastandaard die gebruikt moet worden
+    voor het publiceren van (de link naar) beeldmateriaal, zoals met `edm:isShownBy`, `foaf:depiction` of `schema:image`?
+</div>
+
+<div class="note">
+    **Discussie**: Een RDF-voorbeeld opnemen om te laten zien hoe er naar beeldmateriaal verwezen kan worden?
+</div>
