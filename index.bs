@@ -30,12 +30,12 @@ De requirements zijn een verdieping van DERA en kunnen een aanvulling vormen van
 
 Dit document beschrijft enkel de requirements die specifiek gelden voor bronhouders van terminologiebronnen.
 Daarnaast zijn er algemene requirements die gelden voor alle bronhouders, ongeacht het soort informatie dat zij aanbieden.
-Deze requirements worden uitgewerkt in een opzichzelfstaand [document voor datasets](https://netwerk-digitaal-erfgoed.github.io/requirements-datasets/).
+Deze requirements worden uitgewerkt in een opzichzelfstaand [[!NDE-DATASETS|document voor datasets]].
 De requirements voor terminologiebronnen zijn dus een aanvulling op de requirements voor datasets.
 
 <div class="issue">
     Een begrippenkader opnemen, met begrippen en hun definities. Dit is bij voorkeur een separaat document dat ook gebruikt kan worden
-    door andere documenten, zoals de "Requirements voor datasets".
+    door andere documenten, zoals de [[!NDE-DATASETS|Requirements voor datasets]].
 </div>
 
 Doelgroep {#doelgroep}
