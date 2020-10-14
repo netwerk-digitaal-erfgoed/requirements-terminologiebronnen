@@ -477,7 +477,7 @@ Dit kan met *wildcards* of jokertekens. Bijvoorbeeld:
 1. De vraag `*zee*` zoekt naar alle termen waarin "zee" voorkomt en vindt onder meer "zuiderzee", "zeeboeken" en "onderzeeboten".
 
 Daarnaast weet een collectiebeheerder soms vrij nauwkeurig welke term ze zoekt.
-In dat geval will ze aan een terminologiebron een vrij nauwkeurige zoekvraag stellen. Dit kan met Booleaanse operatoren. Bijvoorbeeld:
+In dat geval wil ze aan een terminologiebron een vrij nauwkeurige zoekvraag stellen. Dit kan met Booleaanse operatoren. Bijvoorbeeld:
 1. De vraag `kuitbroek OR kniebroek` zoekt naar termen die "kuitbroek" of "kniebroek" zijn, maar niet bijvoorbeeld "klepbroek" of "heupbroek".
 1. De vraag `sportbroek AND zwembroek` zoekt naar termen die zowel sport- als zwembroek zijn, maar niet een van beide.
 1. De vraag `broek NOT pofbroek` zoekt naar alle termen die "broek" zijn maar niet "pofbroek".
