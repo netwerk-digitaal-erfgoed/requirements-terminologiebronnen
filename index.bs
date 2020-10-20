@@ -10,7 +10,7 @@ Abstract: Dit document beschrijft de functionele en niet-functionele requirement
 
 Inleiding {#inleiding}
 ============
-Hoe kunnen gebruikers – zoals burgers, leerlingen of wetenschappers – informatie over schilderijen van Rembrandt vinden,
+Hoe kunnen gebruikers – zoals leerlingen, journalisten of wetenschappers – informatie over schilderijen van Rembrandt vinden,
 ongeacht de instellingen die deze informatie beheren? Dat lukt alleen als collectiebeheerders van instellingen gebruikmaken van dezelfde termen
 voor het beschrijven van dezelfde informatie. Bijvoorbeeld: door de term "schilderij" te benutten in plaats van "painting"
 of "kunstwerk". Of de term "Rembrandt van Rijn" in plaats van "Rembrandt".
@@ -48,7 +48,7 @@ Status {#status}
 
 Dit document is een concept en nog geen officiële publicatie.
 
-Prioriteitstelling van requirements {#prioriteitstelling#}
+Prioriteitstelling van requirements {#prioriteitstelling}
 ============
 
 Elke requirement is voorzien van een prioriteit. De prioriteit volgt de [MoSCoW-methode](https://nl.wikipedia.org/wiki/MoSCoW-methode):
