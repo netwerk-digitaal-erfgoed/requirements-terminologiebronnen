@@ -104,10 +104,6 @@ Het koppelvlak moet van een bepaald type zijn: een SPARQL-endpoint.
 Zo'n endpoint heeft zowel een krachtige zoektaal – \[SPARQL](https://www.w3.org/TR/sparql11-overview/) – als de snelheid die nodig
 is om zoekvragen van een collectiebeheerder tijdig te kunnen beantwoorden.
 
-<div class="note">
-    **Discussie**: Is het zinnig om SPARQL zo nadrukkelijk te eisen? Of zouden we dit moeten openlaten?
-</div>
-
 Deze requirement vereist niet dat een terminologiebron *zelf* een koppelvlak moet bieden.
 Een bronhouder kan ervoor kiezen om het koppelvlak van een ander platform te benutten, bijvoorbeeld van een organisatie met wie
 de bronhouder samenwerkt.
@@ -121,8 +117,7 @@ De terminologiebron maakt termen vindbaar via een voor mensen toegankelijke onli
 Een collectiebeheerder wil de mogelijkheid hebben om termen in een terminologiebron op te zoeken.
 Dit stelt haar in staat om een beeld te krijgen van de structuur en samenhang van de bron.
 Daarom dient de terminologiebron een online zoekomgeving te bieden die door de collectiebeheerder geraadpleegd kan worden.
-Voorbeelden van zoekomgevingen zijn die van de [Cultuurhistorische Thesaurus](https://thesaurus.cultureelerfgoed.nl/search;conceptschemes=cht:b532325c-dc08-49db-b4f1-15e53b037ec3),
-[ErfGeo](https://erfgeo.nl/thesaurus/) en \[ULAN](http://www.getty.edu/research/tools/vocabularies/ulan/).
+Voorbeelden van zoekomgevingen zijn die van de [Cultuurhistorische Thesaurus](https://thesaurus.cultureelerfgoed.nl/search;conceptschemes=cht:b532325c-dc08-49db-b4f1-15e53b037ec3) en \[ULAN](http://www.getty.edu/research/tools/vocabularies/ulan/).
 
 Deze requirement is geen verplichting: niet elke bron heeft de mogelijkheid om een online zoekomgeving aan te bieden.
 Een bronhouder kan ervoor kiezen om de zoekomgeving van een ander platform te benutten, bijvoorbeeld van een organisatie met wie de bronhouder samenwerkt.
