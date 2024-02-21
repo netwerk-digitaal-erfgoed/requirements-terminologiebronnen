@@ -5,19 +5,32 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build:
-    runs-on: ubuntu-18.04
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Output Bikeshed to HTML
-        uses: netwerk-digitaal-erfgoed/bikeshed-action@v1
-
-      - name: Publish HTML to GitHub Pages
-        if: success()
-        uses: peaceiris/actions-gh-pages@v3.7.0-8
+      - name: Build and validate
+        uses: w3c/spec-prod@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          VALIDATE_MARKUP: false
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
