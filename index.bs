@@ -150,10 +150,10 @@ De terminologiebron publiceert bepaalde informatie over haar termen {#4}
 Een term in een terminologiebron kan alleen gevonden en begrepen worden door een collectiebeheerder als er ten minste bepaalde informatie
 over de term gepubliceerd wordt. Welke informatie dat is, is afhankelijk van het type term.
 
-Bijvoorbeeld: bij de informatie over een persoon dient niet alleen diens naam gepubliceerd te worden ("Jan de Vries"),
-maar ook diens geboortedatum ("12 oktober 1816"). Zonder de geboortedatum is onduidelijk welke Jan de Vries bedoeld wordt.
-Een ander voorbeeld: bij de informatie over een geografische entiteit dient niet alleen de naam gepubliceerd te worden ("Utrecht"),
-maar ook de soort ("Gemeente"). Zonder de soort is onduidelijk of de provincie, gemeente of stad bedoeld wordt.
+Bijvoorbeeld: bij de informatie over een persoon dient niet alleen diens naam gepubliceerd te worden (“Jan de Vries”),
+maar ook diens geboortedatum (“12 oktober 1816”). Zonder de geboortedatum is onduidelijk welke Jan de Vries bedoeld wordt.
+Een ander voorbeeld: bij de informatie over een geografische entiteit dient niet alleen de naam gepubliceerd te worden (“Utrecht”),
+maar ook de soort (“Gemeente”). Zonder de soort is onduidelijk of de provincie, gemeente of stad bedoeld wordt.
 
 Onderstaande tabel bevat de informatie die idealiter voor elke term gepubliceerd wordt, ongeacht het type van de term:
 
@@ -163,6 +163,7 @@ Onderstaande tabel bevat de informatie die idealiter voor elke term gepubliceerd
             <th>Soort informatie</th>
             <th>Betekenis</th>
             <th>Toelichting</th>
+            <th>Gebruik</th>
         </tr>
     </thead>
     <tbody>
@@ -170,46 +171,55 @@ Onderstaande tabel bevat de informatie die idealiter voor elke term gepubliceerd
             <td>Identifier</td>
             <td>Een unieke identifier van de term</td>
             <td>De identifier dient een URI te zijn</td>
+            <td>Verplicht</td>
         </tr>
         <tr>
             <td>Type</td>
             <td>Het type van de term, zoals een "Persoon", "Onderwerp" of "Plaats"</td>
             <td>Het type dient afkomstig te zijn uit een metadatastandaard, zoals `schema:Person` of `skos:Concept`</td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Naam</td>
             <td>De naam van de term</td>
             <td>Staat ook bekend als "label" of "voorkeurslabel"</td>
+            <td>Verplicht</td>
         </tr>
         <tr>
             <td>Alternatieve naam</td>
             <td>Een alternatieve benaming van de term, zoals een synoniem</td>
             <td>Bijvoorbeeld: `Rembrandt van Rijn` is een alternatieve naam van `Rembrandt`</td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Definitie</td>
             <td>Een definitie of omschrijving van de term</td>
             <td></td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Notitie</td>
             <td>Aanvullende informatie over de reikwijdte of het gebruik van de term</td>
             <td>Staat ook bekend als "scope note"</td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Gerelateerde term</td>
             <td>Een term die een (niet-hiërarchische) relatie met de term heeft</td>
             <td>Bijvoorbeeld: de term `Theo van Gogh` is gerelateerd aan `Vincent van Gogh`</td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Bovenliggende term</td>
             <td>Een term die hiërarchisch direct boven de term ligt</td>
             <td>Bijvoorbeeld: de term `Noord-Brabant` is de bovenliggende term van `Nuenen`</td>
+            <td>Aanbevolen</td>
         </tr>
         <tr>
             <td>Onderliggende term</td>
             <td>Een term die hiërarchisch direct onder de term ligt</td>
             <td>Bijvoorbeeld: de term `slagzwaard` is een onderliggende term van `zwaard`</td>
+            <td>Aanbevolen</td>
         </tr>
     </tbody>
 </table>
